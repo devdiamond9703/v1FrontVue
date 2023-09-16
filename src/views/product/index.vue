@@ -35,7 +35,7 @@
             return {
                 itemsPerPage: 5,
                 products: {
-                    all: null,
+                    all: {},
                     one: {
                         "id": null, 
                         "title": null, 
@@ -49,8 +49,8 @@
                         "thumbnail": null
                     },
                     headers: [
-                        { title: 'Dessert (100g serving)', align: 'start', sortable: false, key: 'name'},
-                        { title: 'Calories', align: 'end', key: 'calories' },
+                        // { title: 'Dessert (100g serving)', align: 'start', sortable: false, key: 'name'},
+                        { title: 'Calories', align: 'start', key: 'calories' },
                         { title: 'Fat (g)', align: 'end', key: 'fat' },
                         { title: 'Carbs (g)', align: 'end', key: 'carbs' },
                         { title: 'Protein (g)', align: 'end', key: 'protein' },

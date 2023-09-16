@@ -21,6 +21,12 @@ const routes = [
         name: 'product111',
         component: () => import('@/views/product/view.vue'),
       },
+      {
+        path: '/attribute',
+        name: 'attribute',
+        component: () => import('@/views/attribute/index.vue'),
+      }
+      
     ],
   },
 ]
