@@ -1,13 +1,11 @@
 <template>
     <v-row>
         <v-col class="text-left">
-            <h2>Attribute List</h2>
+            <h3>Attribute List</h3>
         </v-col>
         <v-col class="text-right">        
-            <v-btn color="success" location="end" density='default' icon="mdi-plus" @click="attribute.dialog.add = true"></v-btn>    
+            <v-btn color="success" v-if="can('attribute', 'view')" location="end" density='default' icon="mdi-plus" @click="attribute.dialog.add = true"></v-btn>    
         </v-col>
-    </v-row>
-    <v-row>
         <v-col cols="12">
             <v-data-table
                 v-model:items-per-page="attribute.page"
@@ -33,17 +31,13 @@
                     <span v-else class="text-h5">Add attribute</span>
                 </v-card-title>
                 <v-card-text>
-                    <v-container>
-                        <v-row>
-                            <v-col cols="12">
-                                <v-text-field
-                                    v-model="attribute.field.name"
-                                    label="Attribute name"
-                                    variant="underlined"
-                                ></v-text-field>
-                            </v-col>
-                        </v-row>
-                    </v-container>
+                    <v-col cols="12">
+                        <v-text-field
+                            v-model="attribute.field.name"
+                            label="Attribute name"
+                            variant="underlined"
+                        ></v-text-field>
+                    </v-col>
                 </v-card-text>
 
                 <v-card-actions>
@@ -77,18 +71,16 @@
                                     variant="solo"
                                     readonly
                                 ></v-text-field>
-                            </v-col>
-                            <v-col cols="12">
                                 <v-text-field
                                     v-model="attributeValue.field.value"
                                     label="Attribute value"
                                     variant="underlined"
                                 ></v-text-field>
-                            </v-col>
-                            <v-col class="text-right">
-                                <v-btn color="blue-darken-1"  @click="saveAttributeValue">
-                                    Save
-                                </v-btn>
+                                <div class="text-right">
+                                    <v-btn color="blue-darken-1"  @click="saveAttributeValue">
+                                        Save
+                                    </v-btn>
+                                </div>
                             </v-col>
                         </v-row>
                         
@@ -130,10 +122,13 @@
         getValuesByAttrApi,
         saveAttrValueApi
     } from '../../api/attribute/index.js'
+
+    import { can } from '../../globals/methods/index.js';
     
     export default {
         data() {
             return {
+                can: can,
                 attribute: {
                     page: 5,
                     all: [],

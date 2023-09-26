@@ -1,4 +1,4 @@
-const URL = 'https://dummyjson.com'
+const URL = 'http://127.0.0.1:8000/api'
 export async function getProductsOneApi() {
     let response = await fetch(`${ URL }/products/1`, {
         method: 'GET'
@@ -8,6 +8,25 @@ export async function getProductsOneApi() {
 export async function getProductsAllApi() {
     let response = await fetch(`${ URL }/products`, {
         method: 'GET'
-    }) 
+    })
+    return await response.json();
+}
+
+export async function saveProductApi(data) {
+    let response = await fetch(`${ URL }/products`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    return await response.json()
+}
+
+export async function getVariantsByProductApi(productId) {
+    let response = await fetch(`${ URL }/products/variants/${productId}`, {
+        method: 'GET'
+    })
     return await response.json();
 }

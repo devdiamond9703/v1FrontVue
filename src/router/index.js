@@ -1,39 +1,55 @@
 // Composables
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
+import AppLayout from '../layouts/default/Main.vue';
+import Login from '../layouts/auth/login.vue';
+import Dashboard from '../views/Dashboard.vue';
+import Attribute from '../views/attribute/index.vue';
+import Category from '../views/category/index.vue';
+import Product from '../views/product/index.vue';
 
 const routes = [
   {
     path: '/',
-    component: () => import('@/layouts/default/Main.vue'),
+    redirect: '/app'
+  },
+  {
+    path: '/app',
+    name: 'app',
+    redirect: '/app/dashboard',
+    component: AppLayout,
     children: [
       {
-        path: '',
-        name: 'Home',
-        component: () => import('@/views/Home.vue'),
+        path: 'dashboard',
+        name: 'app.dashboard',
+        component: Dashboard
       },
       {
-        path: '/product',
-        name: 'product',
-        component: () => import('@/views/product/index.vue'),
+        path: 'attribute',
+        name: 'app.attribute',
+        component: Attribute
       },
       {
-        path: '/product/view/:id',
-        name: 'product111',
-        component: () => import('@/views/product/view.vue'),
+        path: 'category',
+        name: 'app.category',
+        component: Category
       },
       {
-        path: '/attribute',
-        name: 'attribute',
-        component: () => import('@/views/attribute/index.vue'),
-      }
-      
-    ],
+        path: 'product',
+        name: 'app.product',
+        component: Product
+      },
+    ]
   },
-]
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  }
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 })
 
-export default router
+export default router;
